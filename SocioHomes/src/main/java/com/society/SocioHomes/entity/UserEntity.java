@@ -10,6 +10,7 @@ public class UserEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long userId;
+    String fullName;
     @Column
     String govtIdNo;
     @Column
@@ -23,9 +24,26 @@ public class UserEntity {
     @Column
     String userName;
 
+    public UserEntity(){}
 
-    @OneToOne(mappedBy = "user")
-    private SocietyAdminEntity societyAdmin;
+    public UserEntity(Long userId, String fullName, String govtIdNo, String password, String userAddress, Long userContact, String userEmail, String userName) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.govtIdNo = govtIdNo;
+        this.password = password;
+        this.userAddress = userAddress;
+        this.userContact = userContact;
+        this.userEmail = userEmail;
+        this.userName = userName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public Long getUserId() {
         return userId;
@@ -81,39 +99,5 @@ public class UserEntity {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public SocietyAdminEntity getSocietyAdmin() {
-        return societyAdmin;
-    }
-
-    public void setSocietyAdmin(SocietyAdminEntity societyAdmin) {
-        this.societyAdmin = societyAdmin;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
-        return Objects.equals(userId, that.userId) && Objects.equals(govtIdNo, that.govtIdNo) && Objects.equals(password, that.password) && Objects.equals(userAddress, that.userAddress) && Objects.equals(userContact, that.userContact) && Objects.equals(userEmail, that.userEmail) && Objects.equals(userName, that.userName) && Objects.equals(societyAdmin, that.societyAdmin);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, govtIdNo, password, userAddress, userContact, userEmail, userName, societyAdmin);
-    }
-
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "userId=" + userId +
-                ", govtIdNo='" + govtIdNo + '\'' +
-                ", password='" + password + '\'' +
-                ", userAddress='" + userAddress + '\'' +
-                ", userContact=" + userContact +
-                ", userEmail='" + userEmail + '\'' +
-                ", userName='" + userName + '\'' +
-                ", societyAdmin=" + societyAdmin +
-                '}';
     }
 }
